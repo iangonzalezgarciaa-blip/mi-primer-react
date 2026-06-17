@@ -112,65 +112,196 @@ src/
 | `/404` | NotFound | Página no encontrada |
 | `*` | NotFound | Cualquier ruta inexistente |
 
-## Requisitos previos
+## Guía completa para ejecutar el proyecto
 
-Para correr `npm install` en tu PC necesitas abrir la **terminal** (línea de comandos). Así se hace:
+Acá te dejo el paso a paso detallado para que puedas levantar el proyecto en tu computador sin problemas. Yo lo hice así y funciona perfecto.
 
-### En Windows:
+---
 
-1. Abre la carpeta de tu proyecto `mi-primer-react` en el explorador de archivos
-2. Haz click derecho en un espacio vacío dentro de la carpeta
-3. Selecciona **"Abrir en Terminal"** (o "Abrir ventana de PowerShell aquí")
-4. Escribe `npm install` y presiona Enter
+### Paso 1: Instalar Node.js (si no lo tienes)
 
-### Alternativa con VS Code (si lo usas):
+Lo primero es tener **Node.js** instalado, porque sin eso no puedes usar `npm` (el gestor de paquetes que usamos para instalar las dependencias del proyecto).
 
-1. Abre tu proyecto en VS Code
-2. Presiona **Ctrl + ñ** (o Ctrl + `) para abrir la terminal integrada
-3. Escribe `npm install` y presiona Enter
+1. Ve a https://nodejs.org
+2. Descarga la versión **LTS** (la que dice "Recommended for most users")
+3. Instálalo con las opciones por defecto (siguiente, siguiente, instalar)
+4. Al instalar Node.js, **npm se instala automáticamente**, así que no tienes que hacer nada extra
 
-### Requisito:
-
-Necesitas tener **Node.js** instalado en tu PC. Si no lo tienes, descárgalo de https://nodejs.org (la versión LTS). Al instalar Node.js, npm se instala automáticamente.
-
-Para verificar si ya lo tienes, escribe en la terminal:
+Para verificar que se instaló correctamente, abre una terminal y escribe:
 
 ```bash
 node --version
+```
+
+```bash
 npm --version
 ```
 
-Si te aparecen números de versión, ya lo tienes instalado y puedes correr `npm install`.
+Si te aparecen números de versión (ejemplo: `v18.17.0` y `9.6.7`), ya estás listo.
 
-## Cómo ejecutar el proyecto
+---
 
-1. Instala dependencias:
+### Paso 2: Clonar o descargar el proyecto
+
+Si todavía no tienes el proyecto en tu computador:
+
+**Opción A - Clonar con Git:**
+```bash
+git clone https://github.com/iangonzalezgarciaa-blip/mi-primer-react.git
+```
+
+**Opción B - Descargar ZIP:**
+1. Ve a https://github.com/iangonzalezgarciaa-blip/mi-primer-react
+2. Click en el botón verde **"Code"**
+3. Click en **"Download ZIP"**
+4. Descomprime el ZIP en tu escritorio o donde quieras
+
+---
+
+### Paso 3: Abrir la terminal en la carpeta del proyecto
+
+Necesitas abrir una terminal (línea de comandos) dentro de la carpeta `mi-primer-react`. Hay varias formas de hacerlo:
+
+**En Windows (explorador de archivos):**
+1. Abre la carpeta `mi-primer-react` en el explorador de archivos
+2. Haz click derecho en un espacio vacío dentro de la carpeta
+3. Selecciona **"Abrir en Terminal"** (o **"Abrir ventana de PowerShell aquí"**)
+
+**En VS Code (lo que yo uso):**
+1. Abre la carpeta del proyecto con VS Code (`Archivo > Abrir carpeta`)
+2. Presiona **Ctrl + ñ** (o **Ctrl + `**) para abrir la terminal integrada
+3. Verifica que en la terminal aparezca algo como `C:\Users\tuUsuario\mi-primer-react>`
+
+**En Mac:**
+1. Abre la app **Terminal**
+2. Escribe `cd ` (con espacio) y arrastra la carpeta del proyecto a la terminal
+3. Presiona Enter
+
+---
+
+### Paso 4: Instalar las dependencias del frontend
+
+Estando en la terminal dentro de la carpeta `mi-primer-react`, escribe:
 
 ```bash
 npm install
 ```
 
-2. Levanta el servidor del backend (API de pizzas):
+Esto descarga todas las librerías que necesita el proyecto (React, Vite, Bootstrap, React Router, etc.). Va a crear una carpeta `node_modules` — eso es normal, no la borres.
+
+> **Nota:** Si te aparece algún warning amarillo, no te preocupes, son avisos menores. Lo importante es que no aparezcan errores en rojo.
+
+---
+
+### Paso 5: Instalar las dependencias del backend (API)
+
+El proyecto tiene una API local que sirve los datos de las pizzas. Para instalar sus dependencias:
 
 ```bash
 cd simple-api-backend-nodejs-express-fs-json-jwt-main
+npm install
+```
+
+---
+
+### Paso 6: Levantar el servidor del backend (API de pizzas)
+
+Sin salir de la carpeta del backend, escribe:
+
+```bash
 node index.js
 ```
 
-3. Levanta el servidor de desarrollo (en otra terminal):
+Deberías ver un mensaje como:
+
+```
+Servidor corriendo en el puerto 5000
+```
+
+**Importante:** Deja esta terminal abierta y corriendo. No la cierres porque el backend necesita estar activo para que la app funcione.
+
+---
+
+### Paso 7: Levantar el servidor de desarrollo del frontend
+
+Abre **una segunda terminal** (en VS Code puedes abrir otra con el botón `+` en la barra de terminales). Asegúrate de estar en la carpeta raíz del proyecto `mi-primer-react` (no en la carpeta del backend):
+
+```bash
+cd ..
+```
+
+Luego levanta el servidor de desarrollo:
 
 ```bash
 npm run dev
 ```
 
-4. Crea la versión de producción:
+Deberías ver algo como:
+
+```
+  VITE v5.x.x  ready in xxx ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+```
+
+---
+
+### Paso 8: Abrir la aplicación en el navegador
+
+Abre tu navegador (Chrome, Firefox, Edge, etc.) y ve a:
+
+```
+http://localhost:5173
+```
+
+Deberías ver la página principal de la Pizzería Mamma Mía con el catálogo de pizzas cargadas desde la API.
+
+---
+
+### Resumen rápido (si ya tienes todo instalado)
+
+Si ya hiciste los pasos anteriores y solo quieres volver a levantar el proyecto:
+
+```bash
+# Terminal 1: Backend
+cd simple-api-backend-nodejs-express-fs-json-jwt-main
+node index.js
+
+# Terminal 2: Frontend (en otra terminal)
+npm run dev
+```
+
+Abre http://localhost:5173 en tu navegador y listo.
+
+---
+
+### Crear la versión de producción (opcional)
+
+Si necesitas generar los archivos optimizados para subir a un servidor:
 
 ```bash
 npm run build
 ```
 
+Esto crea una carpeta `dist/` con todos los archivos listos para producción.
+
+---
+
+### Solución de problemas comunes
+
+| Problema | Solución |
+|----------|----------|
+| `npm: command not found` | No tienes Node.js instalado. Descárgalo de https://nodejs.org |
+| `EADDRINUSE: port 5000` | Ya tienes el backend corriendo en otra terminal. Ciérrala o usa otro puerto |
+| Las pizzas no cargan | Verifica que el backend esté corriendo en la terminal 1 (`node index.js`) |
+| `EADDRINUSE: port 5173` | Ya tienes el frontend corriendo. Cierra la otra terminal o abre http://localhost:5173 directamente |
+| Error al instalar dependencias | Borra la carpeta `node_modules` y vuelve a correr `npm install` |
+
+---
+
 ## Comentarios finales
 
-Este archivo está actualizado para reflejar el estado actual del proyecto en el hito 5. Se implementó el enrutamiento completo con React Router Dom, se aplicó el feedback del profesor del hito 4 (navegación dinámica y mensajes de error amigables), y se pulió todo el proyecto con comentarios en español para facilitar la lectura y comprensión del código.
+Este proyecto lo fui desarrollando por hitos. En el Hito 5 implementé el enrutamiento completo con React Router Dom, apliqué el feedback del profesor del Hito 4 (navegación dinámica y mensajes de error amigables), y pulí todo el proyecto con comentarios en español para facilitar la lectura y comprensión del código.
 
-Si quiere y me puede contactar por Iangonzalezgarciaa@gmail.com.
+Si tienes dudas o quieres contactarme: **iangonzalezgarciaa@gmail.com**
