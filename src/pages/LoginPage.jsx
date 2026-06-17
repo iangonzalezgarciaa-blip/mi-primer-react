@@ -1,6 +1,7 @@
 // Componente LoginPage - Formulario de inicio de sesión
 // Valida email y contraseña antes de enviar, mostrando errores si hay campos inválidos
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const LoginPage = () => {
   // Estados para los campos del formulario
@@ -56,6 +57,7 @@ const LoginPage = () => {
 
   return (
     <form className="container my-5" onSubmit={handleSubmit}>
+      <Link to="/" className="btn btn-outline-dark mb-3">← Volver al inicio</Link>
       <h2 className="mb-4">Iniciar sesión</h2>
 
       {/* Campo de email */}

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
@@ -81,6 +82,9 @@ function App() {
 
   return (
     <BrowserRouter>
+      {/* Componente que hace scroll al inicio en cada cambio de ruta */}
+      <ScrollToTop />
+
       {/* Barra de navegación con el total del carrito */}
       <Navbar total={totalCarrito} />
 

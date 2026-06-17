@@ -2,7 +2,7 @@
 // Usa useParams para obtener el id dinámico desde la URL (ej: /pizza/p001)
 // Consume la API para traer los datos de la pizza seleccionada
 import { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 
 const Pizza = ({ onAddToCart }) => {
   // Obtenemos el id de la pizza desde la URL de forma dinámica
@@ -77,6 +77,9 @@ const Pizza = ({ onAddToCart }) => {
 
   return (
     <main className="container my-4">
+      {/* Enlace para volver al catálogo */}
+      <Link to="/" className="btn btn-outline-dark mb-3">← Volver al catálogo</Link>
+
       <div className="card pizza-card mx-auto">
         <div className="row g-0 align-items-center">
           {/* Imagen de la pizza */}

@@ -1,5 +1,7 @@
 // Componente Profile - Muestra el perfil del usuario con su email y opción de cerrar sesión
 // Por ahora el email y el botón de logout son estáticos, en próximos hitos se implementará la autenticación real
+import { Link } from 'react-router-dom'
+
 const Profile = () => {
   // Email estático de ejemplo (se reemplazará con datos reales en futuros hitos)
   const userEmail = 'usuario@example.com'
@@ -25,7 +27,9 @@ const Profile = () => {
               </div>
             </div>
 
-            <h2 className="text-center mb-4">Perfil del Usuario</h2>
+            <Link to="/" className="btn btn-outline-dark mb-3">← Volver al inicio</Link>
+
+          <h2 className="text-center mb-4">Perfil del Usuario</h2>
 
             {/* Mostramos el email del usuario */}
             <div className="mb-4">

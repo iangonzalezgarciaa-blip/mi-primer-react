@@ -1,5 +1,7 @@
 // Componente Cart - Página del carrito de compras
 // Muestra las pizzas agregadas, permite ajustar cantidades, vaciar el carrito y ver el total
+import { Link } from 'react-router-dom'
+
 const Cart = ({ cart, onChangeCount, onClearCart }) => {
   // Calculamos el total sumando precio * cantidad de cada pizza en el carrito
   const total = cart.reduce((sum, item) => sum + item.price * item.count, 0)
@@ -13,6 +15,9 @@ const Cart = ({ cart, onChangeCount, onClearCart }) => {
           Ajusta las cantidades, revisa tu pedido y sigue disfrutando de la experiencia rústica.
         </p>
       </div>
+
+      {/* Enlace para volver al catálogo */}
+      <Link to="/" className="btn btn-outline-dark mb-3">← Seguir comprando</Link>
 
       {/* Si el carrito está vacío mostramos un aviso */}
       {cart.length === 0 ? (

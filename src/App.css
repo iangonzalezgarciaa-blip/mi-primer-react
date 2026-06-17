@@ -54,6 +54,9 @@ body::before {
   background: linear-gradient(180deg, rgba(68, 35, 20, 0.98), rgba(52, 28, 16, 0.96)) !important;
   border-bottom: 2px solid rgba(221, 138, 63, 0.34);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+  position: sticky;
+  top: 0;
+  z-index: 1050;
 }
 
 .navbar-brand {

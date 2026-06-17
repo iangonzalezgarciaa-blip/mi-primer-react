@@ -1,6 +1,7 @@
 // Componente RegisterPage - Formulario de registro de usuario
 // Valida email, contraseña y confirmación antes de enviar
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const RegisterPage = () => {
   // Estados para los campos del formulario
@@ -50,6 +51,7 @@ const RegisterPage = () => {
 
   return (
     <form className="container my-5" onSubmit={handleSubmit}>
+      <Link to="/" className="btn btn-outline-dark mb-3">← Volver al inicio</Link>
       <h2 className="mb-4">Registro de usuario</h2>
 
       {/* Campo de email */}
