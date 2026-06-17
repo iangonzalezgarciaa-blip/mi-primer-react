@@ -112,6 +112,36 @@ src/
 | `/404` | NotFound | Página no encontrada |
 | `*` | NotFound | Cualquier ruta inexistente |
 
+## Requisitos previos
+
+Para correr `npm install` en tu PC necesitas abrir la **terminal** (línea de comandos). Así se hace:
+
+### En Windows:
+
+1. Abre la carpeta de tu proyecto `mi-primer-react` en el explorador de archivos
+2. Haz click derecho en un espacio vacío dentro de la carpeta
+3. Selecciona **"Abrir en Terminal"** (o "Abrir ventana de PowerShell aquí")
+4. Escribe `npm install` y presiona Enter
+
+### Alternativa con VS Code (si lo usas):
+
+1. Abre tu proyecto en VS Code
+2. Presiona **Ctrl + ñ** (o Ctrl + `) para abrir la terminal integrada
+3. Escribe `npm install` y presiona Enter
+
+### Requisito:
+
+Necesitas tener **Node.js** instalado en tu PC. Si no lo tienes, descárgalo de https://nodejs.org (la versión LTS). Al instalar Node.js, npm se instala automáticamente.
+
+Para verificar si ya lo tienes, escribe en la terminal:
+
+```bash
+node --version
+npm --version
+```
+
+Si te aparecen números de versión, ya lo tienes instalado y puedes correr `npm install`.
+
 ## Cómo ejecutar el proyecto
 
 1. Instala dependencias:
