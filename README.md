@@ -259,10 +259,35 @@ Deberías ver la página principal de la Pizzería Mamma Mía con el catálogo d
 
 ---
 
+### Alternativa rápida: Inicio automático con doble click (Windows)
+
+Si estás en Windows y no quieres abrir terminales manualmente, incluí un archivo **`iniciar-proyecto.bat`** en la raíz del proyecto que hace todo automáticamente:
+
+1. Busca el archivo **`iniciar-proyecto.bat`** en la carpeta `mi-primer-react`
+2. **Doble click** en él
+3. ¡Listo! Se abre todo solo
+
+Lo que hace el script:
+- Verifica que tengas Node.js instalado
+- Instala las dependencias del frontend y backend
+- Levanta el backend en una terminal
+- Levanta el frontend en otra terminal
+- Abre el navegador en http://localhost:5173
+
+Para cerrar todo, solo cierra las dos ventanas de terminal que se abren.
+
+> **Nota:** La primera vez que lo ejecutes puede tardar un poco porque instala las dependencias. Las siguientes veces será mucho más rápido.
+
+---
+
 ### Resumen rápido (si ya tienes todo instalado)
 
 Si ya hiciste los pasos anteriores y solo quieres volver a levantar el proyecto:
 
+**Opción A — Con el script .bat (Windows):**
+Doble click en `iniciar-proyecto.bat`
+
+**Opción B — Manual por terminal:**
 ```bash
 # Terminal 1: Backend
 cd simple-api-backend-nodejs-express-fs-json-jwt-main
