@@ -1,17 +1,22 @@
-const Navbar = ({ onNavigate, token = false }) => {
-  const total = 25000
-
+const Navbar = ({ onNavigate, token = false, total = 0 }) => {
   return (
-    <nav className="navbar navbar-expand-lg bg-dark navbar-dark px-4">
+    <nav className="navbar navbar-expand-lg site-navbar px-4">
       <div className="container-fluid">
         <span className="navbar-brand">Pizzería Mamma Mía!</span>
 
-        <div className="d-flex gap-2">
+        <div className="d-flex gap-2 flex-wrap">
           <button
             className="btn btn-outline-light"
             onClick={() => onNavigate?.('home')}
           >
             🍕 Home
+          </button>
+
+          <button
+            className="btn btn-outline-light"
+            onClick={() => onNavigate?.('cart')}
+          >
+            🛒 Carrito
           </button>
 
           {token ? (
@@ -37,7 +42,7 @@ const Navbar = ({ onNavigate, token = false }) => {
           )}
 
           <button className="btn btn-outline-info">
-            🛒 Total: ${total.toLocaleString('es-CL')}
+            🧾 Total: ${total.toLocaleString('es-CL')}
           </button>
         </div>
       </div>
