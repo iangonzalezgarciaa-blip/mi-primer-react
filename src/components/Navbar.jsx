@@ -1,4 +1,7 @@
-const Navbar = ({ onNavigate, token = false, total = 0 }) => {
+const Navbar = ({ activeRoute, onNavigate, token = false, total = 0 }) => {
+  const tabClass = (tab) =>
+    tab === activeRoute ? 'btn btn-light text-dark' : 'btn btn-outline-light'
+
   return (
     <nav className="navbar navbar-expand-lg site-navbar px-4">
       <div className="container-fluid">
@@ -6,14 +9,21 @@ const Navbar = ({ onNavigate, token = false, total = 0 }) => {
 
         <div className="d-flex gap-2 flex-wrap">
           <button
-            className="btn btn-outline-light"
+            className={tabClass('home')}
             onClick={() => onNavigate?.('home')}
           >
             🍕 Home
           </button>
 
           <button
-            className="btn btn-outline-light"
+            className={tabClass('pizza')}
+            onClick={() => onNavigate?.('pizza')}
+          >
+            🍽️ Pizza
+          </button>
+
+          <button
+            className={tabClass('cart')}
             onClick={() => onNavigate?.('cart')}
           >
             🛒 Carrito

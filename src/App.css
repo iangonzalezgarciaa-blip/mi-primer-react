@@ -205,6 +205,36 @@ main.container .col-lg-4 {
   display: flex;
 }
 
+.pizza-card {
+  background: var(--panel);
+  border: 1px solid rgba(200, 110, 50, 0.18);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(82, 47, 22, 0.18);
+  max-width: 100%;
+}
+
+.pizza-card .card-body {
+  padding: 2rem;
+}
+
+.pizza-card .pizza-image {
+  width: 100%;
+  height: 100%;
+  max-height: 600px;
+  object-fit: cover;
+}
+
+.pizza-card .ingredients-list li {
+  margin-bottom: 0.55rem;
+  color: var(--text-muted);
+}
+
+.btn-add-pizza {
+  padding: 0.95rem 1.7rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
 
 .card {
   background: var(--panel);

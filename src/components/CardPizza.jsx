@@ -1,4 +1,4 @@
-﻿const CardPizza = ({ name, price, ingredients, img, desc, onAdd }) => {
+﻿const CardPizza = ({ name, price, ingredients, img, desc, onAdd, onViewMore }) => {
   return (
     <div className="card h-100 shadow-sm">
       <img src={img} className="card-img-top" alt={name} />
@@ -22,11 +22,8 @@
           Precio: ${price.toLocaleString('es-CL')}
         </h4>
 
-        <div className="d-flex justify-content-around mt-3">
-          <button
-            className="btn btn-outline-dark"
-            onClick={() => alert(desc)}
-          >
+        <div className="d-flex justify-content-around mt-3 flex-wrap gap-2">
+          <button className="btn btn-outline-dark" onClick={onViewMore}>
             Ver más 👀
           </button>
           <button className="btn btn-dark btn-add" onClick={onAdd}>

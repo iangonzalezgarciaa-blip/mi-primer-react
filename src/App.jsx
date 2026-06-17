@@ -4,8 +4,9 @@ import RegisterPage from './pages/RegisterPage'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Cart from './components/Cart'
+import Pizza from './components/Pizza'
 import Footer from './components/Footer'
-import { pizzas, pizzaCart } from './pizzas'
+import { pizzaCart } from './pizzas'
 import './App.css'
 
 function App() {
@@ -79,15 +80,17 @@ function App() {
             onClearCart={handleClearCart}
           />
         )
+      case 'pizza':
+        return <Pizza onAddToCart={handleAddToCart} onNavigate={setRoute} />
       case 'home':
       default:
-        return <Home pizzas={pizzas} onAddToCart={handleAddToCart} />
+        return <Home onAddToCart={handleAddToCart} onNavigate={setRoute} />
     }
   }
 
   return (
     <>
-      <Navbar onNavigate={setRoute} total={totalCarrito} />
+      <Navbar activeRoute={route} onNavigate={setRoute} total={totalCarrito} />
       <div className={`toast-message ${message ? 'show' : ''}`} role="status" aria-live="polite">
         <div className="toast-body">{message}</div>
       </div>
