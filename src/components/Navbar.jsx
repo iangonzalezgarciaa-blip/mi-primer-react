@@ -1,59 +1,49 @@
-const Navbar = ({ activeRoute, onNavigate, token = false, total = 0 }) => {
-  const tabClass = (tab) =>
-    tab === activeRoute ? 'btn btn-light text-dark' : 'btn btn-outline-light'
+// Componente Navbar - Barra de navegación principal de la pizzería
+// Usa Link de react-router-dom para navegar entre las rutas sin recargar la página
+import { Link } from 'react-router-dom'
 
+const Navbar = ({ total = 0, token = false }) => {
   return (
     <nav className="navbar navbar-expand-lg site-navbar px-4">
       <div className="container-fluid">
-        <span className="navbar-brand">Pizzería Mamma Mía!</span>
+        {/* Logo de la pizzería que lleva al inicio */}
+        <Link to="/" className="navbar-brand text-decoration-none">
+          Pizzería Mamma Mía!
+        </Link>
 
+        {/* Menú de navegación con enlaces a las distintas rutas */}
         <div className="d-flex gap-2 flex-wrap">
-          <button
-            className={tabClass('home')}
-            onClick={() => onNavigate?.('home')}
-          >
+          {/* Enlace a la página principal */}
+          <Link to="/" className="btn btn-outline-light">
             🍕 Home
-          </button>
+          </Link>
 
-          <button
-            className={tabClass('pizza')}
-            onClick={() => onNavigate?.('pizza')}
-          >
-            🍽️ Pizza
-          </button>
-
-          <button
-            className={tabClass('cart')}
-            onClick={() => onNavigate?.('cart')}
-          >
-            🛒 Carrito
-          </button>
-
+          {/* Si el usuario tiene sesión activa, mostramos Profile y Logout */}
           {token ? (
             <>
-              <button className="btn btn-outline-light">🔓 Profile</button>
-              <button className="btn btn-outline-light">🔒 Logout</button>
+              <Link to="/profile" className="btn btn-outline-light">
+                🔓 Profile
+              </Link>
+              <Link to="/" className="btn btn-outline-light">
+                🔒 Logout
+              </Link>
             </>
           ) : (
             <>
-              <button
-                className="btn btn-outline-light"
-                onClick={() => onNavigate?.('login')}
-              >
+              {/* Si no hay sesión, mostramos Login y Register */}
+              <Link to="/login" className="btn btn-outline-light">
                 🔐 Login
-              </button>
-              <button
-                className="btn btn-outline-light"
-                onClick={() => onNavigate?.('register')}
-              >
+              </Link>
+              <Link to="/register" className="btn btn-outline-light">
                 🔐 Register
-              </button>
+              </Link>
             </>
           )}
 
-          <button className="btn btn-outline-info">
-            🧾 Total: ${total.toLocaleString('es-CL')}
-          </button>
+          {/* Botón del carrito que muestra el total y redirige a /cart */}
+          <Link to="/cart" className="btn btn-outline-info">
+            🛒 Total: ${total.toLocaleString('es-CL')}
+          </Link>
         </div>
       </div>
     </nav>

@@ -1,3 +1,4 @@
+// Componente Footer - Pie de página con los derechos reservados de la pizzería
 const Footer = () => {
   return (
     <footer className="site-footer text-white text-center py-3 mt-4">

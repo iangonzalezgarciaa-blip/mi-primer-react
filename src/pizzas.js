@@ -1,5 +1,8 @@
-// Restauración de imágenes funcionales para el hito 3
-// Se eliminaron enlaces corruptos y se volvieron a usar URLs de imagen válidas previas del proyecto.
+// pizzas.js - Datos estáticos de las pizzas y del carrito de ejemplo
+// Este archivo se usa como respaldo en caso de que la API no esté disponible
+// y también para inicializar el carrito con algunos productos de muestra
+
+// Array con todas las pizzas disponibles en la pizzería
 export const pizzas = [
   {
     desc: "La pizza es una preparación culinaria que consiste en un pan plano, habitualmente de forma circular, elaborado con harina de trigo, levadura, agua y sal que comúnmente se cubre con salsa de tomate, queso y otros muchos ingredientes frescos, y que se hornea a alta temperatura, tradicionalmente en un horno de leña.",
@@ -51,7 +54,8 @@ export const pizzas = [
   },
 ];
 
-// Simulación de un carrito de compras con imágenes restauradas
+// Simulación de un carrito de compras con algunas pizzas de ejemplo
+// Se usa para inicializar el estado del carrito en App.jsx
 export const pizzaCart = [
   {
     id: "P001",
