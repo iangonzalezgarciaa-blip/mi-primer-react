@@ -1,34 +1,29 @@
-// Componente Pizza - Vista de detalle individual de una pizza
-// Usa useParams para obtener el id dinámico desde la URL (ej: /pizza/p001)
-// Consume la API para traer los datos de la pizza seleccionada
+// Pizza - Detalle de una pizza, consume CartContext y PizzaContext
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useCart } from '../context/CartContext'
 
-const Pizza = ({ onAddToCart }) => {
-  // Obtenemos el id de la pizza desde la URL de forma dinámica
+const Pizza = () => {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { addToCart } = useCart()
 
-  // Estado para almacenar los datos de la pizza y el estado de carga/error
   const [pizza, setPizza] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  // Efecto para consultar la API cada vez que cambia el id de la URL
   useEffect(() => {
     const fetchPizza = async () => {
       setLoading(true)
       setError(null)
       try {
         const res = await fetch(`http://localhost:5000/api/pizzas/${id}`)
-        if (!res.ok) {
-          throw new Error('No se pudo obtener la pizza desde el servidor')
-        }
+        if (!res.ok) throw new Error('No se pudo obtener la pizza')
         const data = await res.json()
         setPizza(data)
       } catch (err) {
         console.error('Error al cargar la pizza:', err)
-        setError('¡Ups! No pudimos cargar la pizza. Revisa que el servidor esté encendido e intenta de nuevo.')
+        setError('¡Ups! No pudimos cargar la pizza. Revisa que el servidor esté encendido.')
       } finally {
         setLoading(false)
       }
@@ -36,7 +31,6 @@ const Pizza = ({ onAddToCart }) => {
     fetchPizza()
   }, [id])
 
-  // Mientras se cargan los datos mostramos un spinner amigable
   if (loading) {
     return (
       <main className="container my-4 text-center">
@@ -48,7 +42,6 @@ const Pizza = ({ onAddToCart }) => {
     )
   }
 
-  // Si hubo un error, mostramos un mensaje amigable con opción de reintentar
   if (error) {
     return (
       <main className="container my-4 text-center">
@@ -56,20 +49,17 @@ const Pizza = ({ onAddToCart }) => {
           <h4 className="alert-heading">🍕 ¡Algo salió mal!</h4>
           <p>{error}</p>
           <hr />
-          <button className="btn btn-outline-danger" onClick={() => window.location.reload()}>
-            Reintentar
-          </button>
+          <button className="btn btn-outline-danger" onClick={() => window.location.reload()}>Reintentar</button>
         </div>
       </main>
     )
   }
 
-  // Si no se encontró la pizza, mostramos un aviso
   if (!pizza) {
     return (
       <main className="container my-4 text-center">
         <div className="alert alert-warning my-5">
-          <p className="mb-0">🍕 Pizza no encontrada. ¿Seguro que existe ese sabor?</p>
+          <p className="mb-0">🍕 Pizza no encontrada.</p>
         </div>
       </main>
     )
@@ -77,21 +67,13 @@ const Pizza = ({ onAddToCart }) => {
 
   return (
     <main className="container my-4">
-      {/* Enlace para volver al catálogo */}
       <Link to="/" className="btn btn-outline-dark mb-3">← Volver al catálogo</Link>
 
       <div className="card pizza-card mx-auto">
         <div className="row g-0 align-items-center">
-          {/* Imagen de la pizza */}
           <div className="col-12 col-md-6">
-            <img
-              src={pizza.img}
-              alt={pizza.name}
-              className="img-fluid pizza-image"
-            />
+            <img src={pizza.img} alt={pizza.name} className="img-fluid pizza-image" />
           </div>
-
-          {/* Información detallada de la pizza */}
           <div className="col-12 col-md-6">
             <div className="card-body">
               <h1 className="card-title text-capitalize mb-3">{pizza.name}</h1>
@@ -107,13 +89,9 @@ const Pizza = ({ onAddToCart }) => {
                 ))}
               </ul>
 
-              {/* Botón para agregar la pizza al carrito y navegar al carrito */}
               <button
                 className="btn btn-warning btn-lg btn-add-pizza"
-                onClick={() => {
-                  onAddToCart?.(pizza)
-                  navigate('/cart')
-                }}
+                onClick={() => { addToCart(pizza); navigate('/cart') }}
               >
                 Añadir al carrito 🛒
               </button>

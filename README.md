@@ -1,23 +1,34 @@
-# Pizzería Mamma Mía - Hito 5
+# Pizzería Mamma Mía - Hito 6
 
-Este proyecto es una aplicación web de una pizzería creada con React y Vite. En este hito se implementó el enrutamiento completo de la aplicación con React Router.
+Este proyecto es una aplicación web de una pizzería creada con React y Vite. En este hito se implementó Context API para manejar el estado global del carrito y las pizzas.
 
 ## Descripción general
 
-La aplicación muestra una lista de pizzas que se cargan desde una API externa (`GET http://localhost:5000/api/pizzas`) y renderiza cada pizza mediante componentes reutilizables. Ahora incluye navegación completa entre páginas usando React Router Dom.
+La aplicación muestra una lista de pizzas que se cargan desde una API externa (`GET http://localhost:5000/api/pizzas`) y renderiza cada pizza mediante componentes reutilizables. Usa React Router Dom para la navegación y Context API para el estado global.
 
-El carrito de compras está completamente funcional con lógica de cantidades, cálculo de total y navegación desde el Navbar.
+El carrito de compras se maneja con `CartContext`, que permite agregar, eliminar y modificar productos desde cualquier componente sin necesidad de pasar props manualmente. El total se calcula dentro del Context y se comparte entre el Navbar y la página Cart.
 
 ## Tecnologías utilizadas
 
 - React
 - Vite
 - React Router Dom
+- React Context API
 - Bootstrap
 - JavaScript
 - HTML
 - CSS
 - Git y GitHub
+
+## Checklist Hito 6
+
+- [x] Implementé `CartContext` para manejar el carrito de forma global con `createContext` y `useContext`.
+- [x] El Navbar consume `CartContext` para mostrar el total actualizado de los productos.
+- [x] Desde Home se pueden agregar productos al carrito usando `CartContext` (botón "Añadir" de cada card).
+- [x] La página Cart consume `CartContext` para mostrar productos, modificar cantidades y eliminar items.
+- [x] El total se calcula dentro del Context y es el mismo en Navbar y en Cart.
+- [x] Implementé `PizzaContext` para centralizar el consumo de la API de pizzas (opcional).
+- [x] Reduje los comentarios del código según feedback del profesor.
 
 ## Checklist Hito 5
 
@@ -46,6 +57,19 @@ El carrito de compras está completamente funcional con lógica de cantidades, c
 - [x] Comentarios en español en todos los archivos del proyecto.
 
 ## Changelog (registro de cambios)
+
+### Cambios en el Hito 6
+
+- Se creó `CartContext` con `createContext`, `useContext` y un Provider que envuelve toda la app.
+- Se movió la lógica del carrito (estado, addToCart, changeCount, clearCart, total) de `App.jsx` a `CartContext`.
+- Se creó `PizzaContext` para centralizar el fetch de pizzas desde la API.
+- Se refactorizó `App.jsx` para usar `CartProvider` y `PizzaProvider` como wrappers.
+- Se actualizó `Navbar.jsx` para consumir el total directamente desde `CartContext`.
+- Se actualizó `Home.jsx` para consumir pizzas desde `PizzaContext` y agregar al carrito con `CartContext`.
+- Se actualizó `Cart.jsx` para consumir el carrito y total desde `CartContext`.
+- Se actualizó `Pizza.jsx` para usar `addToCart` desde `CartContext`.
+- Se redujeron los comentarios excesivos en todos los archivos (feedback del profesor).
+- Se eliminaron props innecesarias que ahora se obtienen del Context.
 
 ### Cambios en el Hito 5
 
@@ -79,16 +103,20 @@ El carrito de compras está completamente funcional con lógica de cantidades, c
 
 ```
 src/
-├── App.jsx              # Componente raíz con rutas y estado del carrito
+├── App.jsx              # Componente raíz con rutas y Providers
 ├── App.css              # Estilos globales del diseño rústico
 ├── main.jsx             # Punto de entrada de la app
 ├── pizzas.js            # Datos estáticos de respaldo
 ├── index.css            # Estilos base
+├── context/
+│   ├── CartContext.jsx  # Context global del carrito de compras
+│   └── PizzaContext.jsx # Context para el consumo de la API de pizzas
 ├── components/
 │   ├── CardPizza.jsx    # Tarjeta de pizza para el catálogo
 │   ├── Footer.jsx       # Pie de página
 │   ├── Header.jsx       # Banner principal
-│   └── Navbar.jsx       # Barra de navegación con Link
+│   ├── ScrollToTop.jsx  # Scroll al inicio en cada cambio de ruta
+│   └── Navbar.jsx       # Barra de navegación con Link y CartContext
 └── pages/
     ├── Home.jsx         # Página principal con catálogo
     ├── LoginPage.jsx    # Formulario de inicio de sesión
@@ -327,6 +355,6 @@ Esto crea una carpeta `dist/` con todos los archivos listos para producción.
 
 ## Comentarios finales
 
-Este proyecto lo fui desarrollando por hitos. En el Hito 5 implementé el enrutamiento completo con React Router Dom, apliqué el feedback del profesor del Hito 4 (navegación dinámica y mensajes de error amigables), y pulí todo el proyecto con comentarios en español para facilitar la lectura y comprensión del código.
+Este proyecto lo fui desarrollando por hitos. En el Hito 6 implementé Context API para manejar el estado global del carrito y las pizzas, eliminando la necesidad de pasar props entre componentes. También apliqué el feedback del profesor del Hito 5 reduciendo los comentarios excesivos.
 
 Si tienes dudas o quieres contactarme: **iangonzalezgarciaa@gmail.com**
