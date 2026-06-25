@@ -306,6 +306,8 @@ Para cerrar todo, solo cierra las dos ventanas de terminal que se abren.
 
 > **Nota:** La primera vez que lo ejecutes puede tardar un poco porque instala las dependencias. Las siguientes veces será mucho más rápido.
 
+> **Si no funciona:** Haz click derecho en el archivo → **"Ejecutar como administrador"**. Si aún así falla, usa la opción manual (Pasos 4 a 8).
+
 ---
 
 ### Resumen rápido (si ya tienes todo instalado)
@@ -350,6 +352,7 @@ Esto crea una carpeta `dist/` con todos los archivos listos para producción.
 | Las pizzas no cargan | Verifica que el backend esté corriendo en la terminal 1 (`node index.js`) |
 | `EADDRINUSE: port 5173` | Ya tienes el frontend corriendo. Cierra la otra terminal o abre http://localhost:5173 directamente |
 | Error al instalar dependencias | Borra la carpeta `node_modules` y vuelve a correr `npm install` |
+| El .bat no funciona | Click derecho → "Ejecutar como administrador". Si sigue fallando, usa los pasos manuales |
 
 ---
 
