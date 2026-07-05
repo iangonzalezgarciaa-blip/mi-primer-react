@@ -1,10 +1,12 @@
-// App.jsx - Componente raíz con React Router y Context Providers
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { CartProvider, useCart } from './context/CartContext'
 import { PizzaProvider } from './context/PizzaContext'
+import { UserProvider } from './context/UserContext'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
+import ProtectedRoute from './components/ProtectedRoute'
+import GuestRoute from './components/GuestRoute'
 import Home from './pages/Home'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
@@ -28,11 +30,11 @@ function AppContent() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<GuestRoute><LoginPage /></GuestRoute>} />
+        <Route path="/register" element={<GuestRoute><RegisterPage /></GuestRoute>} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/pizza/:id" element={<Pizza />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -45,11 +47,13 @@ function AppContent() {
 function App() {
   return (
     <BrowserRouter>
-      <PizzaProvider>
-        <CartProvider>
-          <AppContent />
-        </CartProvider>
-      </PizzaProvider>
+      <UserProvider>
+        <PizzaProvider>
+          <CartProvider>
+            <AppContent />
+          </CartProvider>
+        </PizzaProvider>
+      </UserProvider>
     </BrowserRouter>
   )
 }

@@ -1,4 +1,3 @@
-// Context para manejar el carrito de compras de forma global
 import { createContext, useContext, useState, useEffect } from 'react'
 import { pizzaCart } from '../pizzas'
 

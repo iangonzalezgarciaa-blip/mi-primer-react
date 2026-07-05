@@ -1,4 +1,3 @@
-// Datos estáticos de pizzas y carrito de ejemplo
 
 export const pizzas = [
   {

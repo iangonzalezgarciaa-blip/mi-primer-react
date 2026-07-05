@@ -1,4 +1,3 @@
-// ScrollToTop - Hace scroll al inicio en cada cambio de ruta
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 

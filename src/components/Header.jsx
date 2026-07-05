@@ -1,4 +1,3 @@
-// Header - Banner principal de la pizzería
 const Header = () => {
   return (
     <header className="site-header text-white text-center py-5">

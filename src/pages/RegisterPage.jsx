@@ -1,4 +1,3 @@
-// RegisterPage - Formulario de registro con validación
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 

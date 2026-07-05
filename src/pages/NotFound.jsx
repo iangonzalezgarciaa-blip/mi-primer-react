@@ -1,4 +1,3 @@
-// NotFound - Página 404
 import { Link } from 'react-router-dom'
 
 const NotFound = () => {

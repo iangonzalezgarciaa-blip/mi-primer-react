@@ -1,9 +1,10 @@
-// Cart - Carrito de compras, consume CartContext
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
+import { useUser } from '../context/UserContext'
 
 const Cart = () => {
   const { cart, total, changeCount, clearCart } = useCart()
+  const { token } = useUser()
 
   return (
     <main className="container my-4">
@@ -50,7 +51,10 @@ const Cart = () => {
               <h5>Total</h5>
               <p className="fs-4 fw-bold">${total.toLocaleString('es-CL')}</p>
               <button className="btn btn-outline-danger w-100 mb-3" onClick={clearCart}>Limpiar carrito</button>
-              <button className="btn btn-dark w-100">Pagar</button>
+              <button className="btn btn-dark w-100" disabled={!token}>Pagar</button>
+              {!token && (
+                <small className="text-muted d-block mt-2">Inicia sesión para pagar.</small>
+              )}
             </div>
           </div>
         </div>

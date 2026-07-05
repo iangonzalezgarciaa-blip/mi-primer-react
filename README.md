@@ -1,12 +1,12 @@
-# Pizzería Mamma Mía - Hito 6
+# Pizzería Mamma Mía - Hito 7
 
-Este proyecto es una aplicación web de una pizzería creada con React y Vite. En este hito se implementó Context API para manejar el estado global del carrito y las pizzas.
+Este proyecto es una aplicación web de una pizzería creada con React y Vite. En este hito trabajé React Router II: rutas protegidas, `useParams` para el detalle de pizza y un `UserContext` para manejar la sesión (token simulado).
 
 ## Descripción general
 
 La aplicación muestra una lista de pizzas que se cargan desde una API externa (`GET http://localhost:5000/api/pizzas`) y renderiza cada pizza mediante componentes reutilizables. Usa React Router Dom para la navegación y Context API para el estado global.
 
-El carrito de compras se maneja con `CartContext`, que permite agregar, eliminar y modificar productos desde cualquier componente sin necesidad de pasar props manualmente. El total se calcula dentro del Context y se comparte entre el Navbar y la página Cart.
+El carrito de compras se maneja con `CartContext`, que permite agregar, eliminar y modificar productos desde cualquier componente sin necesidad de pasar props manualmente. El total se calcula dentro del Context y se comparte entre el Navbar y la página Cart. La sesión se maneja con `UserContext`, que guarda un token simulado y expone un método `logout`. Con ese token protejo la ruta `/profile` y bloqueo el acceso a `/login` y `/register` cuando el usuario ya inició sesión.
 
 ## Tecnologías utilizadas
 
@@ -19,6 +19,17 @@ El carrito de compras se maneja con `CartContext`, que permite agregar, eliminar
 - HTML
 - CSS
 - Git y GitHub
+
+## Checklist Hito 7
+
+- [x] Implementé `useParams` en `Pizza.jsx` para obtener el id y consumir `GET /api/pizzas/:id`.
+- [x] `CardPizza.jsx` usa `Link` para redirigir al detalle de la pizza con su id.
+- [x] Creé `UserContext` con un token que por defecto es `true` y un método `logout` que lo cambia a `false`.
+- [x] El Navbar consume `UserContext`: al hacer click en Logout se ejecuta `logout`.
+- [x] Con token `true` muestro Profile y Logout; con token `false` muestro Login y Register. Home y Total siempre visibles.
+- [x] La página Cart consume `UserContext` y deshabilita el botón "Pagar" cuando el token es `false`.
+- [x] Ruta protegida `/profile`: si el token es `false` redirijo a `/login`.
+- [x] Si el token es `true`, bloqueo `/login` y `/register` redirigiendo al Home.
 
 ## Checklist Hito 6
 
@@ -57,6 +68,17 @@ El carrito de compras se maneja con `CartContext`, que permite agregar, eliminar
 - [x] Comentarios en español en todos los archivos del proyecto.
 
 ## Changelog (registro de cambios)
+
+### Cambios en el Hito 7
+
+- Creé `UserContext` con `createContext` y `useContext`: estado `token` (por defecto `true`) y método `logout`.
+- Envolví la app con `UserProvider` en `App.jsx`.
+- Creé `ProtectedRoute` para proteger `/profile` (redirige a `/login` si el token es `false`).
+- Creé `GuestRoute` para bloquear `/login` y `/register` cuando el token es `true` (redirige al Home).
+- Actualicé `Navbar.jsx` para consumir `UserContext`: el botón Logout ejecuta `logout` y los botones cambian según el token.
+- Actualicé `Cart.jsx` para deshabilitar el botón "Pagar" cuando el token es `false`.
+- Conecté el botón de cerrar sesión de `Profile.jsx` con el método `logout`.
+- Reduje los comentarios al mínimo en todos los archivos según el feedback del profesor.
 
 ### Cambios en el Hito 6
 
@@ -110,13 +132,16 @@ src/
 ├── index.css            # Estilos base
 ├── context/
 │   ├── CartContext.jsx  # Context global del carrito de compras
-│   └── PizzaContext.jsx # Context para el consumo de la API de pizzas
+│   ├── PizzaContext.jsx # Context para el consumo de la API de pizzas
+│   └── UserContext.jsx  # Context de sesión (token simulado y logout)
 ├── components/
 │   ├── CardPizza.jsx    # Tarjeta de pizza para el catálogo
 │   ├── Footer.jsx       # Pie de página
 │   ├── Header.jsx       # Banner principal
 │   ├── ScrollToTop.jsx  # Scroll al inicio en cada cambio de ruta
-│   └── Navbar.jsx       # Barra de navegación con Link y CartContext
+│   ├── ProtectedRoute.jsx # Protege rutas según el token
+│   ├── GuestRoute.jsx   # Bloquea login/register si hay sesión
+│   └── Navbar.jsx       # Barra de navegación con Link y Contexts
 └── pages/
     ├── Home.jsx         # Página principal con catálogo
     ├── LoginPage.jsx    # Formulario de inicio de sesión
@@ -132,11 +157,11 @@ src/
 | Ruta | Componente | Descripción |
 |------|-----------|-------------|
 | `/` | Home | Catálogo de pizzas |
-| `/login` | LoginPage | Formulario de login |
-| `/register` | RegisterPage | Formulario de registro |
+| `/login` | LoginPage | Formulario de login (bloqueado si hay sesión) |
+| `/register` | RegisterPage | Formulario de registro (bloqueado si hay sesión) |
 | `/cart` | Cart | Carrito de compras |
 | `/pizza/:id` | Pizza | Detalle de una pizza (dinámico) |
-| `/profile` | Profile | Perfil del usuario |
+| `/profile` | Profile | Perfil del usuario (ruta protegida) |
 | `/404` | NotFound | Página no encontrada |
 | `*` | NotFound | Cualquier ruta inexistente |
 
@@ -358,6 +383,6 @@ Esto crea una carpeta `dist/` con todos los archivos listos para producción.
 
 ## Comentarios finales
 
-Este proyecto lo fui desarrollando por hitos. En el Hito 6 implementé Context API para manejar el estado global del carrito y las pizzas, eliminando la necesidad de pasar props entre componentes. También apliqué el feedback del profesor del Hito 5 reduciendo los comentarios excesivos.
+Este proyecto lo fui desarrollando por hitos. En el Hito 7 trabajé React Router II: agregué `UserContext` para manejar la sesión con un token simulado, protegí la ruta `/profile` y bloqueé `/login` y `/register` cuando ya hay sesión. También reduje los comentarios al mínimo siguiendo el feedback del profesor.
 
 Si tienes dudas o quieres contactarme: **iangonzalezgarciaa@gmail.com**

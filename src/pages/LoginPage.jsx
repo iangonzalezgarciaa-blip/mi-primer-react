@@ -1,4 +1,3 @@
-// LoginPage - Formulario de inicio de sesión con validación
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 

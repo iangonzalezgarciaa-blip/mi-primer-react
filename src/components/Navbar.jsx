@@ -1,9 +1,16 @@
-// Navbar - Barra de navegación que consume CartContext para mostrar el total
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
+import { useUser } from '../context/UserContext'
 
-const Navbar = ({ token = false }) => {
+const Navbar = () => {
   const { total } = useCart()
+  const { token, logout } = useUser()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate('/')
+  }
 
   return (
     <nav className="navbar navbar-expand-lg site-navbar px-4">
@@ -18,7 +25,7 @@ const Navbar = ({ token = false }) => {
           {token ? (
             <>
               <Link to="/profile" className="btn btn-outline-light">🔓 Profile</Link>
-              <Link to="/" className="btn btn-outline-light">🔒 Logout</Link>
+              <button className="btn btn-outline-light" onClick={handleLogout}>🔒 Logout</button>
             </>
           ) : (
             <>

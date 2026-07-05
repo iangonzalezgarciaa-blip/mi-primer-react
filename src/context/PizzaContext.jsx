@@ -1,4 +1,3 @@
-// Context para centralizar el consumo de la API de pizzas
 import { createContext, useContext, useEffect, useState } from 'react'
 
 const PizzaContext = createContext()

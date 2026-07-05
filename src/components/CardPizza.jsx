@@ -1,4 +1,3 @@
-// CardPizza - Tarjeta de pizza para el catálogo
 import { Link } from 'react-router-dom'
 
 const CardPizza = ({ id, name, price, ingredients, img, desc, onAdd }) => {

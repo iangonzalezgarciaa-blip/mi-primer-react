@@ -1,11 +1,14 @@
-// Profile - Perfil del usuario (estático por ahora)
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useUser } from '../context/UserContext'
 
 const Profile = () => {
   const userEmail = 'usuario@example.com'
+  const { logout } = useUser()
+  const navigate = useNavigate()
 
   const handleLogout = () => {
-    alert('Sesión cerrada correctamente')
+    logout()
+    navigate('/')
   }
 
   return (

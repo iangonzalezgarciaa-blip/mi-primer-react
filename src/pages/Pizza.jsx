@@ -1,4 +1,3 @@
-// Pizza - Detalle de una pizza, consume CartContext y PizzaContext
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'

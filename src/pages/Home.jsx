@@ -1,4 +1,3 @@
-// Home - Catálogo de pizzas, consume PizzaContext y CartContext
 import Header from '../components/Header'
 import CardPizza from '../components/CardPizza'
 import { usePizzas } from '../context/PizzaContext'
