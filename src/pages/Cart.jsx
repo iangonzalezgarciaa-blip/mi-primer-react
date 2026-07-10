@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { useUser } from '../context/UserContext'
@@ -5,6 +6,29 @@ import { useUser } from '../context/UserContext'
 const Cart = () => {
   const { cart, total, changeCount, clearCart } = useCart()
   const { token } = useUser()
+  const [success, setSuccess] = useState('')
+  const [error, setError] = useState('')
+
+  const handleCheckout = async () => {
+    setSuccess('')
+    setError('')
+    try {
+      const res = await fetch('http://localhost:5000/api/checkouts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ cart }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'No se pudo procesar la compra')
+      setSuccess('¡Compra realizada con éxito! Gracias por tu pedido.')
+      clearCart()
+    } catch (err) {
+      setError(err.message)
+    }
+  }
 
   return (
     <main className="container my-4">
@@ -16,6 +40,9 @@ const Cart = () => {
       </div>
 
       <Link to="/" className="btn btn-outline-dark mb-3">← Seguir comprando</Link>
+
+      {success && <div className="alert alert-success" role="alert">{success}</div>}
+      {error && <div className="alert alert-danger" role="alert">{error}</div>}
 
       {cart.length === 0 ? (
         <div className="alert alert-secondary">No hay pizzas en el carrito.</div>
@@ -51,7 +78,7 @@ const Cart = () => {
               <h5>Total</h5>
               <p className="fs-4 fw-bold">${total.toLocaleString('es-CL')}</p>
               <button className="btn btn-outline-danger w-100 mb-3" onClick={clearCart}>Limpiar carrito</button>
-              <button className="btn btn-dark w-100" disabled={!token}>Pagar</button>
+              <button className="btn btn-dark w-100" disabled={!token} onClick={handleCheckout}>Pagar</button>
               {!token && (
                 <small className="text-muted d-block mt-2">Inicia sesión para pagar.</small>
               )}

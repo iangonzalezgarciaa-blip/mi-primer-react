@@ -1,13 +1,16 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useUser } from '../context/UserContext'
 
 const LoginPage = () => {
+  const { login } = useUser()
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
-  const [success, setSuccess] = useState('')
+  const [serverError, setServerError] = useState('')
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     const newErrors = {}
 
@@ -18,15 +21,17 @@ const LoginPage = () => {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
-      setSuccess('')
       return
     }
 
     setErrors({})
-    setSuccess('Inicio de sesión exitoso')
-    setEmail('')
-    setPassword('')
-    setTimeout(() => setSuccess(''), 3000)
+    setServerError('')
+    try {
+      await login({ email, password })
+      navigate('/')
+    } catch (err) {
+      setServerError(err.message)
+    }
   }
 
   return (
@@ -64,7 +69,7 @@ const LoginPage = () => {
 
       <button type="submit" className="btn btn-primary mt-3">Ingresar</button>
 
-      {success && <div className="alert alert-success mt-3">{success}</div>}
+      {serverError && <div className="alert alert-danger mt-3" role="alert">{serverError}</div>}
     </form>
   )
 }

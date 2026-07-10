@@ -1,10 +1,14 @@
+import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
 
 const Profile = () => {
-  const userEmail = 'usuario@example.com'
-  const { logout } = useUser()
+  const { email, logout, getProfile } = useUser()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    getProfile().catch(() => {})
+  }, [])
 
   const handleLogout = () => {
     logout()
@@ -32,18 +36,12 @@ const Profile = () => {
             <div className="mb-4">
               <label className="form-label fw-bold">Email registrado:</label>
               <div className="alert alert-light" role="alert">
-                <p className="mb-0 fs-5">{userEmail}</p>
+                <p className="mb-0 fs-5">{email}</p>
               </div>
             </div>
 
             <div className="d-grid gap-2">
               <button className="btn btn-danger btn-lg" onClick={handleLogout}>Cerrar sesión</button>
-            </div>
-
-            <div className="alert alert-info mt-4" role="alert">
-              <small>
-                <strong>Nota:</strong> La autenticación completa se implementará en próximos hitos.
-              </small>
             </div>
           </div>
         </div>

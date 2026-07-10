@@ -1,14 +1,17 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useUser } from '../context/UserContext'
 
 const RegisterPage = () => {
+  const { register } = useUser()
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [errors, setErrors] = useState({})
-  const [success, setSuccess] = useState('')
+  const [serverError, setServerError] = useState('')
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     const newErrors = {}
 
@@ -21,16 +24,17 @@ const RegisterPage = () => {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
-      setSuccess('')
       return
     }
 
     setErrors({})
-    setSuccess('Registro exitoso')
-    setEmail('')
-    setPassword('')
-    setConfirmPassword('')
-    setTimeout(() => setSuccess(''), 3000)
+    setServerError('')
+    try {
+      await register({ email, password })
+      navigate('/')
+    } catch (err) {
+      setServerError(err.message)
+    }
   }
 
   return (
@@ -82,9 +86,7 @@ const RegisterPage = () => {
 
       <button type="submit" className="btn btn-primary mt-3">Registrar</button>
 
-      {success && <div className="alert alert-success mt-3">{success}</div>}
-
-      <p className="mt-3">Email escrito: {email}</p>
+      {serverError && <div className="alert alert-danger mt-3" role="alert">{serverError}</div>}
     </form>
   )
 }

@@ -1,12 +1,12 @@
-# Pizzería Mamma Mía - Hito 7
+# Pizzería Mamma Mía - Hito 8
 
-Este proyecto es una aplicación web de una pizzería creada con React y Vite. En este hito trabajé React Router II: rutas protegidas, `useParams` para el detalle de pizza y un `UserContext` para manejar la sesión (token simulado).
+Este proyecto es una aplicación web de una pizzería creada con React y Vite. En este hito final implementé la autenticación real con el backend usando JWT: login, register, perfil del usuario autenticado y checkout del carrito.
 
 ## Descripción general
 
 La aplicación muestra una lista de pizzas que se cargan desde una API externa (`GET http://localhost:5000/api/pizzas`) y renderiza cada pizza mediante componentes reutilizables. Usa React Router Dom para la navegación y Context API para el estado global.
 
-El carrito de compras se maneja con `CartContext`, que permite agregar, eliminar y modificar productos desde cualquier componente sin necesidad de pasar props manualmente. El total se calcula dentro del Context y se comparte entre el Navbar y la página Cart. La sesión se maneja con `UserContext`, que guarda un token simulado y expone un método `logout`. Con ese token protejo la ruta `/profile` y bloqueo el acceso a `/login` y `/register` cuando el usuario ya inició sesión.
+El carrito de compras se maneja con `CartContext`, que permite agregar, eliminar y modificar productos desde cualquier componente sin necesidad de pasar props manualmente. El total se calcula dentro del Context y se comparte entre el Navbar y la página Cart. La sesión se maneja con `UserContext`, que consume las rutas de autenticación del backend (`/api/auth/login`, `/api/auth/register`, `/api/auth/me`) y guarda el token JWT y el email. Con ese token protejo la ruta `/profile`, bloqueo `/login` y `/register` cuando ya hay sesión, y envío el carrito al checkout (`/api/checkouts`).
 
 ## Tecnologías utilizadas
 
@@ -19,6 +19,17 @@ El carrito de compras se maneja con `CartContext`, que permite agregar, eliminar
 - HTML
 - CSS
 - Git y GitHub
+
+## Checklist Hito 8
+
+- [x] En `UserContext` implementé `login` y `register` consumiendo `/api/auth/login` y `/api/auth/register`; guardo el token JWT y el email en el estado.
+- [x] En `UserContext` implementé `logout` que elimina el token y el email del estado.
+- [x] En `UserContext` implementé `getProfile` consumiendo `/api/auth/me` con el token en el header `Authorization: Bearer`.
+- [x] Las páginas Login y Register usan los métodos de `UserContext` para acceder al sistema.
+- [x] La página Profile muestra el email del usuario autenticado y un botón para cerrar sesión.
+- [x] El botón Logout del Navbar cierra la sesión del usuario.
+- [x] En `Cart.jsx` implementé el envío del carrito al backend consumiendo `/api/checkouts`.
+- [x] En `Cart.jsx` muestro un mensaje de éxito cuando se realiza la compra.
 
 ## Checklist Hito 7
 
@@ -68,6 +79,16 @@ El carrito de compras se maneja con `CartContext`, que permite agregar, eliminar
 - [x] Comentarios en español en todos los archivos del proyecto.
 
 ## Changelog (registro de cambios)
+
+### Cambios en el Hito 8
+
+- Reescribí `UserContext` para autenticación real con JWT: `login` y `register` consumen `/api/auth/login` y `/api/auth/register` y guardan token y email.
+- Agregué `logout` (borra token y email) y `getProfile` (consume `/api/auth/me` con el header `Authorization: Bearer`).
+- Persisto el token y el email en `localStorage` para mantener la sesión al recargar.
+- `LoginPage.jsx` y `RegisterPage.jsx` ahora llaman a `login` y `register` del Context y muestran los errores del backend.
+- `Profile.jsx` muestra el email autenticado (obtenido con `getProfile`) y cierra sesión con `logout`.
+- `Cart.jsx` envía el carrito a `/api/checkouts` con el token y muestra un mensaje de éxito al completar la compra.
+- Mantuve los comentarios al mínimo según el feedback del profesor.
 
 ### Cambios en el Hito 7
 
@@ -133,7 +154,7 @@ src/
 ├── context/
 │   ├── CartContext.jsx  # Context global del carrito de compras
 │   ├── PizzaContext.jsx # Context para el consumo de la API de pizzas
-│   └── UserContext.jsx  # Context de sesión (token simulado y logout)
+│   └── UserContext.jsx  # Context de sesión (JWT: login, register, logout, perfil)
 ├── components/
 │   ├── CardPizza.jsx    # Tarjeta de pizza para el catálogo
 │   ├── Footer.jsx       # Pie de página
@@ -383,6 +404,6 @@ Esto crea una carpeta `dist/` con todos los archivos listos para producción.
 
 ## Comentarios finales
 
-Este proyecto lo fui desarrollando por hitos. En el Hito 7 trabajé React Router II: agregué `UserContext` para manejar la sesión con un token simulado, protegí la ruta `/profile` y bloqueé `/login` y `/register` cuando ya hay sesión. También reduje los comentarios al mínimo siguiendo el feedback del profesor.
+Este proyecto lo fui desarrollando por hitos. En el Hito 8 (final) implementé la autenticación real con el backend usando JWT: `UserContext` consume las rutas de `/api/auth`, guarda el token y el email, y con eso protejo el perfil y permito realizar la compra a través de `/api/checkouts`. Mantuve los comentarios al mínimo siguiendo el feedback del profesor.
 
 Si tienes dudas o quieres contactarme: **iangonzalezgarciaa@gmail.com**
